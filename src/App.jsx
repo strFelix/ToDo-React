@@ -3,6 +3,7 @@ import Todo from "./components/Todo";
 import TodoForm from "./components/TodoForm";
 import "./App.css";
 import Search from "./components/Search";
+import Filter from "./components/Filter";
 
 function App() {
   const [todos, setTodos] = useState(
@@ -45,6 +46,7 @@ function App() {
     <div className="app">
       <h1>Lista de tarefas</h1>
       <Search setSearch={setSearch} search={search} />
+      <Filter />
       <div className="todo-list">
         {todos
         .filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase()))
