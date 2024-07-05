@@ -25,11 +25,17 @@ function App() {
 
     setTodos(newTodos); // setting the new todos array
   }
-
   const removeTodo = (id) => {
     const newTodos = [...todos];
     const filteredTodos = newTodos.filter((todo) => todo.id !== id ? todo : null); // filtering the todos array based on the id
     setTodos(filteredTodos); // setting the new todos array
+  }
+
+  const completeTodo = (id) => {
+    const newTodos = [...todos];
+    newTodos.map((todo) => todo.id === id ? todo.isCompleted = !todo.isCompleted : todo); // mapping the todos array and toggling the isCompleted property
+    // console.log(newTodos)
+    setTodos(newTodos); 
   }
 
   return (
@@ -41,7 +47,7 @@ function App() {
             // mapping the todos
             todo 
           ) => (
-           <Todo todo={todo} key={todo.id} removeTodo={removeTodo}/> // passing the todo as a prop to the Todo component
+           <Todo todo={todo} key={todo.id} removeTodo={removeTodo} completeTodo={completeTodo}/> // passing the todo as a prop to the Todo component
           )
         )}
       </div>
