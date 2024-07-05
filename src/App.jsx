@@ -26,6 +26,12 @@ function App() {
     setTodos(newTodos); // setting the new todos array
   }
 
+  const removeTodo = (id) => {
+    const newTodos = [...todos];
+    const filteredTodos = newTodos.filter((todo) => todo.id !== id ? todo : null); // filtering the todos array based on the id
+    setTodos(filteredTodos); // setting the new todos array
+  }
+
   return (
     <div className="app">
       <h1>Lista de tarefas</h1>
@@ -35,7 +41,7 @@ function App() {
             // mapping the todos
             todo 
           ) => (
-           <Todo todo={todo} key={todo.id}/> // passing the todo as a prop to the Todo component
+           <Todo todo={todo} key={todo.id} removeTodo={removeTodo}/> // passing the todo as a prop to the Todo component
           )
         )}
       </div>
