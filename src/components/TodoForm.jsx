@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 
-const TodoForm = () => {
+const TodoForm = ({addTodo}) => {
     const [value, setValue] = useState('')
     const [category, setCategory] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault() // prevent the default behavior of the form
         if(!value || !category) return // if the value or category is empty, return
+        addTodo(value, category) // call the addTodo function from the App
         setValue('') // reset the value
         setCategory('') // reset the category
         console.log(value, category);

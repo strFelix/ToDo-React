@@ -13,6 +13,19 @@ function App() {
     ]
   );
 
+  const addTodo = (text, category) => {
+    const newTodos = [...todos, // copying the todos array using spread operator
+      {
+        id: todos.length + 1,
+        text,
+        category,
+        isCompleted: false,
+      },
+    ];
+
+    setTodos(newTodos); // setting the new todos array
+  }
+
   return (
     <div className="app">
       <h1>Lista de tarefas</h1>
@@ -26,7 +39,7 @@ function App() {
           )
         )}
       </div>
-      <TodoForm />
+      <TodoForm  addTodo={addTodo}/>
     </div>
   );
 }
