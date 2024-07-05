@@ -2,6 +2,7 @@ import { useState } from "react";
 import Todo from "./components/Todo";
 import TodoForm from "./components/TodoForm";
 import "./App.css";
+import Search from "./components/Search";
 
 function App() {
   const [todos, setTodos] = useState(
@@ -12,6 +13,8 @@ function App() {
       { id: 3, text: "Improve C#", category: "Pessoal", isCompleted: false },
     ]
   );
+
+  const [search, setSearch] = useState(""); // setting the search state
 
   const addTodo = (text, category) => {
     const newTodos = [...todos, // copying the todos array using spread operator
@@ -41,8 +44,11 @@ function App() {
   return (
     <div className="app">
       <h1>Lista de tarefas</h1>
+      <Search setSearch={setSearch} search={search} />
       <div className="todo-list">
-        {todos.map(
+        {todos
+        .filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase()))
+        .map(
           (
             // mapping the todos
             todo 
