@@ -22,7 +22,7 @@ function App() {
             // mapping the todos
             todo 
           ) => (
-           <Todo todo={todo}/> // passing the todo as a prop to the Todo component
+           <Todo todo={todo} key={todo.id}/> // passing the todo as a prop to the Todo component
           )
         )}
       </div>
