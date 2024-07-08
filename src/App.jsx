@@ -19,8 +19,13 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:8000/todo/getall")
       .then((res) => res.json())
-      .then((data) => { 
-        let result = data.map((todo) => { todo.isCompleted === 0 ? todo.isCompleted = false : todo.isCompleted = true; return todo; });
+      .then((data) => {
+        let result = data.map((todo) => {
+          todo.isCompleted === 0
+            ? (todo.isCompleted = false)
+            : (todo.isCompleted = true);
+          return todo;
+        });
         setTodos(result);
       })
       .catch((err) => {
@@ -36,13 +41,32 @@ function App() {
     const newTodos = [
       ...todos, // copying the todos array using spread operator
       {
-        id: todos.length + 1,
         text,
         category,
         isCompleted: false,
       },
     ];
 
+    fetch("http://localhost:8000/todo/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text,
+        category,
+        isCompleted: 0,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    
+    console.log(newTodos);
     setTodos(newTodos); // setting the new todos array
   };
   const removeTodo = (id) => {
@@ -91,7 +115,7 @@ function App() {
             ) => (
               <Todo
                 todo={todo}
-                key={todo.id}
+                key={todo.text}
                 removeTodo={removeTodo}
                 completeTodo={completeTodo}
               /> // passing the todo as a prop to the Todo component
