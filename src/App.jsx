@@ -74,6 +74,14 @@ function App() {
     const filteredTodos = newTodos.filter((todo) =>
       todo.id !== id ? todo : null
     ); // filtering the todos array based on the id
+
+    fetch("http://localhost:8000/todo/delete/" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
     setTodos(filteredTodos); // setting the new todos array
   };
 
