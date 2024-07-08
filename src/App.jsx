@@ -82,6 +82,21 @@ function App() {
     newTodos.map((todo) =>
       todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo
     ); // mapping the todos array and toggling the isCompleted property
+    
+    fetch("http://localhost:8000/todo/completed/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
     // console.log(newTodos)
     setTodos(newTodos);
   };
